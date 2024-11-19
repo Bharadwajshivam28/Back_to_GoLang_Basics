@@ -1,0 +1,34 @@
+name: Test Up and Down Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Choose to bring resources up or down'
+        required: true
+        default: 'down'
+        type: choice
+        options:
+          - 'down'
+          - 'up'
+
+jobs:
+  down:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.action == 'down' }}
+    steps:  
+      - name: "Down Operation"
+        run: echo "Executing Down Operation"
+
+      - name: "Down echo"
+        run: echo "Down echo print"
+
+  up:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.action == 'up' }}
+    steps:  
+      - name: "Up Operation"
+        run: echo "Executing Up Operation"
+
+      - name: "Down echo"
+        run: echo "up echo print"
